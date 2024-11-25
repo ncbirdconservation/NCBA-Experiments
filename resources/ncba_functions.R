@@ -111,7 +111,7 @@ get_blocks <- function(
     querystring <- '{"PRIORITY": "1"}'
 
   } else {
-    
+
     querystring <- "{}"
   }
 
@@ -119,18 +119,18 @@ get_blocks <- function(
   if (is.null(fields) == TRUE) {
     # Run query for data frame
     blocks <- connection_blocks$find(querystring)
-    
+
   } else {
-    
+
     # If spatial is true, add necessary fields to fields list
     if (spatial == TRUE) {
       fields <- c(fields, "SE_X", "SE_Y", "NW_X", "NW_Y")
     }
-    
+
     # Convert the list of field names to a mongolite filter string
-    fields_string <- paste0('{', paste0('"', fields, '" : true', 
+    fields_string <- paste0('{', paste0('"', fields, '" : true',
                                         collapse = ', '), '}')
-    
+
     # Run query for data frame
     blocks <- connection_blocks$find(
       querystring,
@@ -1382,7 +1382,7 @@ get_observations <- function(database = "AtlasCache", species = NULL,
 
       if (EBD_fields_only == FALSE) {
         # don't include this field, duplicated in OBSERVATIONS
-        fields2 <- '{"NCBA_EBD_VER": 0}' 
+        fields2 <- '{"NCBA_EBD_VER": 0}'
       }
     }
 
@@ -1580,9 +1580,13 @@ get_breeding_records <- function(behaviors = NULL,
     # Next, address species
     if (is.null(behaviors) == FALSE) {
       if (query == '{}') {
-        new_end <- str_interp('"OBSERVATIONS.BEHAVIOR_CODE" : { "$in" : ${behaviors_mongolite} } }')
+        new_end <- str_interp(
+          '"OBSERVATIONS.BEHAVIOR_CODE" : { "$in" : ${behaviors_mongolite} } }'
+        )
       } else {
-        new_end <- str_interp(', "OBSERVATIONS.BEHAVIOR_CODE" : { "$in" : ${behaviors_mongolite} } }')
+        new_end <- str_interp(
+          ', "OBSERVATIONS.BEHAVIOR_CODE" : {"$in":${behaviors_mongolite}} }'
+        )
       }
       query <- paste0(substr(query, 1, nchar(query)-1), new_end)
     } else {
@@ -2397,8 +2401,10 @@ block_predicted_spp <- function(block, source) {
   source <- source_lookup[[source]]
 
   # Connect to the blocks collection (table)
-  connection_blocks <- connect_ncba_db(database = "ebd_mgmt",
-                                       collection = "blocks")
+  connection_blocks <- connect_ncba_db(
+    database = "ebd_mgmt",
+    collection = "blocks"
+  )
 
   # Define and execute a query (with fields) for blocks of predicted presence.
   fields <- str_interp('{"${source}": true}')
