@@ -15,7 +15,7 @@ if(!require(tidyverse)) install.packages(
   "tidyverse", repos = "http://cran.us.r-project.org")
 
 # Load the config file
-source(here("resources","ncba_config.r"))
+source(here("resources", "ncba_config.r"))
 
 # Set the working directory to the work_dir variable from the config file.
 #   This may not always work (rmarkdown).....
