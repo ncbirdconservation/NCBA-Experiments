@@ -5,17 +5,20 @@ if (!require(here)) install.packages(
 
 source(here("resources", "ncba_functions.r"))
 
-# t <- get_blocks(fields = c("ID_NCBA_BLOCK"), priority_only = TRUE)
-
-# print(head(t))
-# print(nrow(t))
-
-
-# bsl <- block_spp_lists(
-#   "35080H4SE"
+# priority_block_list <- get_blocks(
+#   fields = c("ID_NCBA_BLOCK"),
+#   priority_only = TRUE
 # )
 
-# print(head(bsl))
-# print(nrows(bsl))
+# print(head(priority_block_list))
+# print(nrow(priority_block_list))
 
-breeding_map("Wood Duck")
+
+bsl <- block_spp_lists(
+  "35080H4SE"
+)
+
+print(head(bsl))
+print(nrow(bsl))
+
+# breeding_map("Wood Duck")

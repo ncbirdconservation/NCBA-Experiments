@@ -1318,7 +1318,8 @@ get_observations <- function(database = "AtlasCache", species = NULL,
   # ATLAS CACHE ----------------------------------------------------------------
   if (database == "AtlasCache") {
     # Connect to the NCBA database
-    connection <- connect_ncba_db("ebd_mgmt", "ebd")
+    # connection <- connect_ncba_db("ebd_mgmt", "ebd")
+    connection <- connect_ncba_db("ebd_mgmt", "ncba_functions_ebd_view")
 
     # ---------- QUERY DEFINITION ----------
     # Define a query sequentially.  First, address project
@@ -1382,7 +1383,7 @@ get_observations <- function(database = "AtlasCache", species = NULL,
 
       if (EBD_fields_only == FALSE) {
         # don't include this field, duplicated in OBSERVATIONS
-        fields2 <- '{"NCBA_EBD_VER": 0}'
+        fields2 <- '{}'
       }
     }
 
@@ -1610,7 +1611,7 @@ get_breeding_records <- function(behaviors = NULL,
       }
 
       if (EBD_fields_only == FALSE) {
-        fields2 <- '{"NCBA_EBD_VER": 0}'
+        fields2 <- '{}'
       }
     }
 
