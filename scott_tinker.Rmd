@@ -1,12 +1,13 @@
+# Tinkering with connecting to MongoDB
+Be sure to have a copy of ncba_config that defines two variables:
+`ncba_db_user` and `ncba_db_pass`
 
-# if (!require(here)) install.packages(
-#   "here", repos = "http://cran.us.r-project.org"
-# )
 
-# source(here("resources", "ncba_functions.r"))
 ```{r}
-if(!require(mongolite)) install.packages(
-  "mongolite", repos = "http://cran.us.r-project.org")
+if (!require(mongolite))
+  install.packages(
+    "mongolite", repos = "http://cran.us.r-project.org"
+  )
 
 HOST = "cluster0-shard-00-00.rzpx8.mongodb.net:27017"
 DB = "ebd_mgmt"
