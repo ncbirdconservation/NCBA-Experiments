@@ -4,7 +4,7 @@
 # )
 
 # source(here("resources", "ncba_functions.r"))
-
+```{r}
 if(!require(mongolite)) install.packages(
   "mongolite", repos = "http://cran.us.r-project.org")
 
@@ -20,7 +20,9 @@ URI = sprintf(
   ncba_db_pass,
   HOST,
   DB)
+```
 
+```{r}
 # connect to a specific collection (table)
 m <- mongo(
   COLLECTION,
@@ -32,7 +34,9 @@ m_block_summaries <- mongo(
   "BLOCK_SUMMARIES",
   url = URI,
   options = ssl_options(weak_cert_validation = T))
+```
 
+```{r}
 species <- "Cerulean Warbler"
 pipeline <- sprintf(
   '[
@@ -59,7 +63,7 @@ pipeline <- sprintf(
   species
 )
 mongodata <- m_block_summaries$aggregate(pipeline)
-
+```
 
 # bsl <- block_spp_lists(
 #   "35080H4SE"
